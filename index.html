@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PO Challan Entry | KSSGG Builders</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--orange:#E8720C;--dark:#1C2B3A;--light:#FEF3E8;--amber:#FAC775;--radius:12px;--radius-sm:8px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#F4F6F8;min-height:100vh;padding:1rem}
+.fw{max-width:480px;margin:0 auto}
+.hdr{background:var(--dark);border-radius:var(--radius);padding:1.25rem 1rem 1rem;margin-bottom:1rem;text-align:center;border-bottom:3px solid var(--orange)}
+.hdr-logo{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:6px}
+.hdr-logo-box{background:var(--orange);color:#fff;font-size:13px;font-weight:600;padding:4px 10px;border-radius:var(--radius-sm);letter-spacing:0.05em}
+.hdr h1{color:#fff;font-size:17px;font-weight:600;margin-bottom:2px}
+.hdr p{color:#FAC775;font-size:12px}
+.sec{background:#fff;border:1px solid #e5e7eb;border-radius:var(--radius);padding:1rem;margin-bottom:0.75rem;overflow:hidden}
+.sec-hdr{display:flex;align-items:center;gap:8px;padding:0.6rem 1rem;margin:-1rem -1rem 0.85rem;background:#f9fafb;border-bottom:1px solid #e5e7eb}
+.sec-hdr i{font-size:17px;color:var(--orange)}
+.sec-hdr span{font-size:13px;font-weight:600;color:var(--dark)}
+.fld{margin-bottom:10px}
+.fld label{display:block;font-size:11px;font-weight:600;color:#6b7280;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.04em}
+.fld input,.fld select,.fld textarea{width:100%;font-size:15px;padding:9px 12px;border:1.5px solid #e5e7eb;border-radius:var(--radius-sm);background:#f9fafb;color:#111;outline:none;transition:border-color 0.15s}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--orange);background:#fff;box-shadow:0 0 0 3px rgba(232,114,12,0.12)}
+.fld textarea{resize:vertical;min-height:64px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.badge{padding:6px 12px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:1.5px solid #e5e7eb;background:#f9fafb;color:#6b7280;transition:all 0.15s;user-select:none}
+.badge:active{transform:scale(0.96)}
+.badge.sel-orange{background:#FEF3E8;color:#9A3412;border-color:var(--orange);font-weight:600}
+.badge.sel-green{background:#F0FDF4;color:#166534;border-color:#22c55e;font-weight:600}
+.badge.sel-red{background:#FEF2F2;color:#991B1B;border-color:#ef4444;font-weight:600}
+.upbox{border:2px dashed #d1d5db;border-radius:var(--radius-sm);padding:0.85rem;text-align:center;cursor:pointer;background:#f9fafb;position:relative;transition:all 0.15s;margin-bottom:8px}
+.upbox:hover{border-color:var(--orange);background:var(--light)}
+.upbox input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.upbox i{font-size:22px;color:var(--orange);display:block;margin-bottom:3px}
+.upbox .ut{font-size:12px;color:#6b7280;font-weight:500}
+.uprow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.file-list{margin-top:6px}
+.file-item{display:flex;align-items:center;gap:6px;background:#FEF3E8;border:1px solid #FAC775;border-radius:6px;padding:5px 8px;margin-bottom:4px;font-size:12px;color:#9A3412;font-weight:500}
+.file-item i{font-size:14px;color:var(--orange)}
+.file-item .del{margin-left:auto;cursor:pointer;color:#ef4444;font-size:14px}
+.add-more{display:flex;align-items:center;justify-content:center;gap:6px;padding:7px;border:1.5px dashed #FAC775;border-radius:var(--radius-sm);cursor:pointer;font-size:12px;color:#9A3412;font-weight:500;background:#FEF3E8;margin-top:4px;position:relative}
+.add-more input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.sub-btn{width:100%;padding:14px;background:var(--orange);color:#fff;border:none;border-radius:var(--radius);font-size:16px;font-weight:600;cursor:pointer;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:8px}
+.sub-btn:hover{background:#c45f00}
+.sub-btn:active{transform:scale(0.98)}
+.ok-box{display:none;background:#F0FDF4;border:1px solid #22c55e;border-radius:var(--radius);padding:1.5rem;text-align:center;margin-top:1rem}
+.ok-box i{font-size:40px;color:#166534;display:block;margin-bottom:8px}
+.ok-box h2{color:#166534;font-size:18px;margin-bottom:4px}
+.ok-box p{color:#15803d;font-size:13px}
+.progress{display:none;background:#e5e7eb;border-radius:20px;height:8px;margin:8px 0;overflow:hidden}
+.progress-bar{height:100%;background:var(--orange);border-radius:20px;transition:width 0.3s;width:0%}
+.progress-text{font-size:12px;color:#6b7280;text-align:center;margin-top:4px}
+#other-mat,#other-unit{display:none}
+</style>
+</head>
+<body>
+<div class="fw">
+  <div class="hdr">
+    <div class="hdr-logo">
+      <div class="hdr-logo-box">KSSGG</div>
+      <span style="color:#FAC775;font-size:14px;font-weight:600">BUILDERS</span>
+    </div>
+    <h1><i class="ti ti-clipboard-list"></i> PO Challan Entry</h1>
+    <p>Material Delivery Inspection Form</p>
+  </div>
+
+  <form id="cf">
+    <div class="sec">
+      <div class="sec-hdr"><i class="ti ti-file-invoice"></i><span>Basic Details</span></div>
+      <div class="fld"><label>PO Number *</label><input type="text" id="po_no" placeholder="e.g. PO-2024-001" required></div>
+      <div class="fld"><label>Vendor Name *</label><input type="text" id="vendor" placeholder="Enter vendor / supplier name" required></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-hdr"><i class="ti ti-package"></i><span>Material Details</span></div>
+      <div class="fld">
+        <label>Material Name *</label>
+        <select id="mat" required onchange="onMat(this.value)">
+          <option value="">-- Select Material --</option>
+          <optgroup label="Structure">
+            <option>Cement</option><option>Steel</option><option>Sand</option><option>Bricks</option><option>Aggregate</option>
+          </optgroup>
+          <optgroup label="MEP">
+            <option>Pipes</option><option>Fittings</option><option>Valves</option><option>Cables</option><option>Conduit</option>
+          </optgroup>
+          <optgroup label="Finishing">
+            <option>Paint</option><option>Tiles</option><option>Waterproofing</option><option>Flooring</option>
+          </optgroup>
+          <option value="Other">Other (specify below)</option>
+        </select>
+      </div>
+      <div class="fld" id="other-mat"><label>Specify Material *</label><input type="text" id="mat_other" placeholder="Type material name..."></div>
+      <div class="fld"><label>Brand</label><input type="text" id="brand" placeholder="e.g. UltraTech, TATA, JSW..." required></div>
+      <div class="row2">
+        <div class="fld"><label>Delivered Qty *</label><input type="number" id="qty" placeholder="0" min="0" step="any" required></div>
+        <div class="fld">
+          <label>Unit *</label>
+          <select id="unit" required onchange="onUnit(this.value)">
+            <option value="">Choose</option>
+            <option>Pcs</option><option>Cft</option><option>Mt.</option><option>Bags</option>
+            <option>Kg</option><option>Ton</option><option>Sq.ft</option><option>Sq.m</option>
+            <option>Rft</option><option>Ltr</option><option>Box</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="fld" id="other-unit"><label>Specify Unit *</label><input type="text" id="unit_other" placeholder="Enter unit..."></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-hdr"><i class="ti ti-checklist"></i><span>Site Inspection</span></div>
+      <div class="fld"><label>Qty Verified by (Site Team)</label><input type="text" id="qvby" placeholder="Inspector / team name"></div>
+      <div class="fld"><label>Quantity Shortage (if any)</label><input type="number" id="shortage" placeholder="0" min="0"></div>
+      <div class="fld">
+        <label>Material Condition on Arrival</label>
+        <div class="badges">
+          <span class="badge" onclick="pick(this,'cond','sel-green')">Good</span>
+          <span class="badge" onclick="pick(this,'cond','sel-red')">Damaged</span>
+          <span class="badge" onclick="pick(this,'cond','sel-orange')">Partial Damage</span>
+          <span class="badge" onclick="pick(this,'cond','sel-red')">Rejected</span>
+        </div>
+        <input type="hidden" id="cond">
+      </div>
+      <div class="fld">
+        <label>Visual Inspection</label>
+        <div class="badges">
+          <span class="badge" onclick="pick(this,'vis','sel-green')">Pass</span>
+          <span class="badge" onclick="pick(this,'vis','sel-red')">Fail</span>
+          <span class="badge" onclick="pick(this,'vis','sel-orange')">Pending</span>
+        </div>
+        <input type="hidden" id="vis">
+      </div>
+      <div class="fld">
+        <label>Brand Verified?</label>
+        <div class="badges">
+          <span class="badge" onclick="pick(this,'bvfy','sel-green')">Yes</span>
+          <span class="badge" onclick="pick(this,'bvfy','sel-red')">No</span>
+          <span class="badge" onclick="pick(this,'bvfy','sel-orange')">Partial</span>
+        </div>
+        <input type="hidden" id="bvfy">
+      </div>
+      <div class="fld">
+        <label>Quality Inspection Result</label>
+        <div class="badges">
+          <span class="badge" onclick="pick(this,'qres','sel-green')">Approved</span>
+          <span class="badge" onclick="pick(this,'qres','sel-red')">Rejected</span>
+          <span class="badge" onclick="pick(this,'qres','sel-orange')">On Hold</span>
+        </div>
+        <input type="hidden" id="qres">
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-hdr"><i class="ti ti-cloud-upload"></i><span>Document Upload</span></div>
+      
+      <div class="fld">
+        <label>Delivery Challan (PDF/Image)</label>
+        <div class="upbox" id="challan-box">
+          <input type="file" accept=".pdf,image/*" onchange="addFile(this,'challan-list','challan-files',false)">
+          <i class="ti ti-file-description"></i>
+          <div class="ut">Tap to upload challan</div>
+        </div>
+        <div class="file-list" id="challan-list"></div>
+      </div>
+
+      <div class="fld">
+        <label>Invoice (PDF/Image)</label>
+        <div class="upbox" id="invoice-box">
+          <input type="file" accept=".pdf,image/*" onchange="addFile(this,'invoice-list','invoice-files',false)">
+          <i class="ti ti-receipt-2"></i>
+          <div class="ut">Tap to upload invoice</div>
+        </div>
+        <div class="file-list" id="invoice-list"></div>
+      </div>
+
+      <div class="fld">
+        <label>Material Photographs (multiple allowed)</label>
+        <div class="upbox" id="photos-box">
+          <input type="file" accept="image/*" multiple onchange="addFile(this,'photos-list','photos-files',true)">
+          <i class="ti ti-camera"></i>
+          <div class="ut">Tap to upload photos</div>
+        </div>
+        <div class="file-list" id="photos-list"></div>
+        <div class="add-more" id="add-more-photos" style="display:none">
+          <input type="file" accept="image/*" multiple onchange="addFile(this,'photos-list','photos-files',true)">
+          <i class="ti ti-plus"></i> Add More Photos
+        </div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-hdr"><i class="ti ti-user-check"></i><span>Final Sign-off</span></div>
+      <div class="fld"><label>Site Engineer Name *</label><input type="text" id="eng" placeholder="Full name" required></div>
+      <div class="fld">
+        <label>PO Completed?</label>
+        <div class="badges">
+          <span class="badge" onclick="pick(this,'poc','sel-green')">Yes</span>
+          <span class="badge" onclick="pick(this,'poc','sel-orange')">Partial</span>
+          <span class="badge" onclick="pick(this,'poc','sel-red')">No</span>
+        </div>
+        <input type="hidden" id="poc">
+      </div>
+      <div class="fld"><label>Remarks</label><textarea id="remarks" placeholder="Any additional notes..."></textarea></div>
+    </div>
+
+    <div class="progress" id="prog">
+      <div class="progress-bar" id="prog-bar"></div>
+    </div>
+    <div class="progress-text" id="prog-text"></div>
+
+    <button type="submit" class="sub-btn" id="sbtn">
+      <i class="ti ti-send"></i> Submit Challan
+    </button>
+  </form>
+
+  <div class="ok-box" id="okbox">
+    <i class="ti ti-circle-check"></i>
+    <h2>Submitted!</h2>
+    <p>Data & files saved successfully</p>
+    <button onclick="resetForm()" style="margin-top:14px;padding:10px 24px;background:var(--orange);color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer;font-size:14px;font-weight:600">Submit Another Entry</button>
+  </div>
+</div>
+
+<script>
+const SHEET_URL="https://script.google.com/macros/s/AKfycbwfi-lqvFy-njRfCCxeeDFXgMBbTVIzyTmOR-U-bKu9I4aimN1BqWRVj3Z55wibu1dojg/exec";
+
+const fileStore={challan:[],invoice:[],photos:[]};
+
+function g(id){return(document.getElementById(id)||{}).value||'';}
+function onMat(v){document.getElementById('other-mat').style.display=v==='Other'?'block':'none';}
+function onUnit(v){document.getElementById('other-unit').style.display=v==='Other'?'block':'none';}
+function pick(el,grp,cls){
+  document.querySelectorAll(`[onclick*="'${grp}'"]`).forEach(b=>b.classList.remove('sel-orange','sel-green','sel-red'));
+  el.classList.add(cls);
+  document.getElementById(grp).value=el.textContent.trim();
+}
+
+function addFile(input,listId,storeKey,multiple){
+  const files=Array.from(input.files);
+  files.forEach(file=>{
+    const reader=new FileReader();
+    reader.onload=function(e){
+      const base64=e.target.result.split(',')[1];
+      if(!multiple) fileStore[storeKey]=[];
+      fileStore[storeKey].push({name:file.name,data:base64,type:file.type});
+      renderFileList(listId,storeKey,multiple);
+    };
+    reader.readAsDataURL(file);
+  });
+  if(multiple && files.length>0){
+    document.getElementById('add-more-photos').style.display='flex';
+  }
+}
+
+function renderFileList(listId,storeKey,multiple){
+  const list=document.getElementById(listId);
+  list.innerHTML='';
+  fileStore[storeKey].forEach((f,i)=>{
+    const div=document.createElement('div');
+    div.className='file-item';
+    const ext=f.name.split('.').pop().toLowerCase();
+    const icon=ext==='pdf'?'ti-file-type-pdf':ext.match(/jpg|jpeg|png|gif|webp/)?'ti-photo':'ti-file';
+    div.innerHTML=`<i class="ti ${icon}"></i><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${f.name}</span><i class="ti ti-x del" onclick="removeFile('${storeKey}',${i},'${listId}',${multiple})"></i>`;
+    list.appendChild(div);
+  });
+}
+
+function removeFile(storeKey,idx,listId,multiple){
+  fileStore[storeKey].splice(idx,1);
+  renderFileList(listId,storeKey,multiple);
+  if(storeKey==='photos' && fileStore.photos.length===0){
+    document.getElementById('add-more-photos').style.display='none';
+  }
+}
+
+function toBase64(file){
+  return new Promise((res,rej)=>{
+    const r=new FileReader();
+    r.onload=e=>res(e.target.result.split(',')[1]);
+    r.onerror=rej;
+    r.readAsDataURL(file);
+  });
+}
+
+function setProgress(pct,text){
+  document.getElementById('prog').style.display='block';
+  document.getElementById('prog-bar').style.width=pct+'%';
+  document.getElementById('prog-text').textContent=text;
+}
+
+document.getElementById('cf').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const btn=document.getElementById('sbtn');
+  btn.innerHTML='<i class="ti ti-loader-2"></i> Uploading...';
+  btn.disabled=true;
+  setProgress(10,'Preparing data...');
+
+  const data={
+    po_no:g('po_no'),vendor:g('vendor'),
+    material_name:g('mat')==='Other'?g('mat_other'):g('mat'),
+    material_other:g('mat_other'),material_brand:g('brand'),
+    quantity:g('qty'),unit:g('unit')==='Other'?g('unit_other'):g('unit'),
+    qty_verified_by:g('qvby'),qty_shortage:g('shortage'),
+    material_condition:g('cond'),visual_inspection:g('vis'),
+    brand_verified:g('bvfy'),quality_result:g('qres'),
+    challan_file:fileStore.challan.length>0?fileStore.challan[0].data:'',
+    challan_name:fileStore.challan.length>0?fileStore.challan[0].name:'',
+    invoice_file:fileStore.invoice.length>0?fileStore.invoice[0].data:'',
+    invoice_name:fileStore.invoice.length>0?fileStore.invoice[0].name:'',
+    photos:fileStore.photos,
+    engineer_name:g('eng'),po_completed:g('poc'),remarks:g('remarks')
+  };
+
+  setProgress(40,'Uploading files to Drive...');
+
+  try{
+    await fetch(SHEET_URL,{method:'POST',body:JSON.stringify(data),mode:'no-cors'});
+    setProgress(100,'Done!');
+    setTimeout(()=>{
+      document.getElementById('cf').style.display='none';
+      document.getElementById('okbox').style.display='block';
+      document.getElementById('prog').style.display='none';
+    },500);
+  }catch(err){
+    alert('Submission failed. Check internet connection.');
+    btn.innerHTML='<i class="ti ti-send"></i> Submit Challan';
+    btn.disabled=false;
+    document.getElementById('prog').style.display='none';
+  }
+});
+
+function resetForm(){
+  document.getElementById('cf').reset();
+  document.getElementById('cf').style.display='block';
+  document.getElementById('okbox').style.display='none';
+  document.querySelectorAll('.badge').forEach(b=>b.classList.remove('sel-orange','sel-green','sel-red'));
+  fileStore.challan=[];fileStore.invoice=[];fileStore.photos=[];
+  ['challan-list','invoice-list','photos-list'].forEach(id=>document.getElementById(id).innerHTML='');
+  document.getElementById('add-more-photos').style.display='none';
+  document.getElementById('other-mat').style.display='none';
+  document.getElementById('other-unit').style.display='none';
+  document.getElementById('prog').style.display='none';
+  const btn=document.getElementById('sbtn');
+  btn.innerHTML='<i class="ti ti-send"></i> Submit Challan';
+  btn.disabled=false;
+}
+</script>
+</body>
+</html>
